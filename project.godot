@@ -1,0 +1,88 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Reference",
+"class": "Convert",
+"language": "GDScript",
+"path": "res://static/data_management/Convert.gd"
+}, {
+"base": "Node",
+"class": "Core",
+"language": "GDScript",
+"path": "res://class/internode/core_class.gd"
+}, {
+"base": "Reference",
+"class": "Mount",
+"language": "GDScript",
+"path": "res://static/node_management/mounting_system.gd"
+}, {
+"base": "Core",
+"class": "System",
+"language": "GDScript",
+"path": "res://class/system_class.gd"
+}, {
+"base": "Reference",
+"class": "alter",
+"language": "GDScript",
+"path": "res://static/node_management/alter.gd"
+}, {
+"base": "Reference",
+"class": "fetch",
+"language": "GDScript",
+"path": "res://static/node_management/Fetch.gd"
+}, {
+"base": "Reference",
+"class": "files",
+"language": "GDScript",
+"path": "res://static/data_management/Data_management.gd"
+}, {
+"base": "Reference",
+"class": "scripts",
+"language": "GDScript",
+"path": "res://static/scripts.gd"
+}, {
+"base": "Reference",
+"class": "with",
+"language": "GDScript",
+"path": "res://static/Constants.gd"
+} ]
+_global_script_class_icons={
+"Convert": "",
+"Core": "",
+"Mount": "",
+"System": "",
+"alter": "",
+"fetch": "",
+"files": "",
+"scripts": "",
+"with": ""
+}
+
+[application]
+
+config/name="Parade"
+run/main_scene="res://system/core.tscn"
+config/icon="res://graphics/icon.png"
+
+[editor]
+
+script_templates_search_path="res://component/script_templates"
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+vram_compression/import_etc=true
+vram_compression/import_etc2=false
+environment/default_environment="res://component/environments/default_env.tres"

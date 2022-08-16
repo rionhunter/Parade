@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://system/core.gd" type="Script" id=1]
+[ext_resource path="res://tool/variablizer/editor_to_script.gd" type="Script" id=2]
+
+[node name="core" type="Node"]
+script = ExtResource( 1 )
+
+[node name="space" type="Spatial" parent="."]
+
+[node name="program" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="panels" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="dev" type="Node" parent="."]
+script = ExtResource( 2 )
