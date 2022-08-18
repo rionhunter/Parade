@@ -8,11 +8,9 @@ static func folder(incoming_path, node_to_parent):
 		var output_path = files.path([incoming_path, f]) + '/'
 		match classification.folder_category(f):
 			classification.category:
-				print('considering %s as category' % output_path)
 				output[f] = systems(output_path, node_to_parent)
 				continue
 			classification.system:
-				print('system: %s' % output_path)
 				output[f] = system(output_path, node_to_parent)
 				continue
 	return output
@@ -37,8 +35,11 @@ static func systems(incoming_folder_of_systems, node_to_parent):
 static func system(incoming_system_file_path, incoming_parent):
 	var script_to_load = files.scan(incoming_system_file_path, files.FILETYPE, ['.gd'])
 	if not script_to_load:
-		print('failed to load ', incoming_system_file_path)
-		return null
+		var output = System.new()
+		output.name = files.file_name(incoming_system_file_path)
+		incoming_parent.add_child(output)
+		
+		return output
 	folder(incoming_system_file_path, incoming_parent)
 #	print('Mounted ', files.file_name(incoming_system_file_path))
 	return script_to_node(node(incoming_parent), script_to_load[0])
@@ -100,7 +101,6 @@ static func folder_to_values(incoming_folder : String, incoming_node : Node):
 				var variable_name = classification.strip(f)
 				var variable_path = files.path([incoming_folder, f]) + '/'
 				var variable_value = category(variable_path, incoming_node)
-				print('variable value is %s' % variable_value)
 				values(incoming_node, variable_name, variable_value)
 			classification.system:
 				values(incoming_node, classification.strip(f), system(files.path([incoming_folder, f]), incoming_node))

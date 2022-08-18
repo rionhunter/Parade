@@ -12,10 +12,8 @@ func _ready():
 	launch_sequence()
 
 func launch_sequence():
-	if not core.launched:
-		yield(core, 'completed_loading')
-	_launched()
-
+	pass
+	
 func _prelaunch():
 	pass
 
