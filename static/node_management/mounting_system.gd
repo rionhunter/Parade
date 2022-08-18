@@ -3,18 +3,31 @@ class_name Mount
 
 static func folder(incoming_path, node_to_parent):
 	var found = files.scan_for_folders(incoming_path)
-	var to_mount = []
-	for folder in found:
-		var output_path = files.path([incoming_path, folder], files.FOLDER)
-		print('considering %s' % output_path)
-		match classification.folder_category(folder):
+	var output = {}
+	for f in found:
+		var output_path = files.path([incoming_path, f]) + '/'
+		match classification.folder_category(f):
 			classification.category:
-				systems(output_path, node_to_parent)
+				print('considering %s as category' % output_path)
+				output[f] = systems(output_path, node_to_parent)
+				continue
 			classification.system:
-				system(output_path, node_to_parent)
+				print('system: %s' % output_path)
+				output[f] = system(output_path, node_to_parent)
+				continue
+	return output
 
+static func category(incoming_path, node_to_parent):
+	var found = files.scan_for_folders(incoming_path)
+	var output = {}
+	for x in found:
+		output[x] = system(files.path([incoming_path, x]), node_to_parent)
+	return output
+
+	
 # Systems are effectively just folders with scripts in them that are of the same name as the folder
 static func systems(incoming_folder_of_systems, node_to_parent):
+	print('Mounting systems for %s' % incoming_folder_of_systems)
 	var incoming_array = files.scan_for_folders(incoming_folder_of_systems)
 	var output = {}
 	for sub_system in incoming_array:
@@ -23,32 +36,34 @@ static func systems(incoming_folder_of_systems, node_to_parent):
 
 static func system(incoming_system_file_path, incoming_parent):
 	var script_to_load = files.scan(incoming_system_file_path, files.FILETYPE, ['.gd'])
-	folder(incoming_system_file_path, incoming_parent)
 	if not script_to_load:
 		print('failed to load ', incoming_system_file_path)
 		return null
+	folder(incoming_system_file_path, incoming_parent)
 #	print('Mounted ', files.file_name(incoming_system_file_path))
 	return script_to_node(node(incoming_parent), script_to_load[0])
 
-static func scan_script_path(node):
-	return files.scan_for_folders(script_path(node))
+static func scan_script_path(incoming_node):
+	return files.scan_for_folders(script_path(incoming_node))
 
-static func script_path(node):
-	var to_path : String = files.parent_folder_of_path(node.get_script().get_path()) + '/'
+static func script_path(incoming_node):
+	var to_path : String = files.parent_folder_of_path(incoming_node.get_script().get_path()) + '/'
 	return to_path.insert(4, '/')
 
 
-static func subsystems(node, folder_name = 'subsystem'):
-	var to_path : String = files.parent_folder_of_path(node.get_script().get_path()) + '/'
+static func subsystems(incoming_node, folder_name = 'subsystem'):
+	var to_path : String = files.parent_folder_of_path(incoming_node.get_script().get_path()) + '/'
 	to_path = to_path.insert(4, '/')
-	var results = scan_script_path(node)
+	var results = scan_script_path(incoming_node)
 	if folder_name in results:
 		to_path = files.path([to_path, 'subsystem'])
-		return systems(to_path, node)
+		return systems(to_path, incoming_node)
 
-static func node(incoming_parent):
+static func node(incoming_parent, incoming_name = ''):
 	var output = Node.new()
 	incoming_parent.add_child(output)
+	if incoming_name:
+		output.name = incoming_name
 	return output
 
 static func script_to_node(incoming_node, incoming_script):
@@ -67,3 +82,25 @@ static func auto_node(incoming_script_address, parent) -> Node:
 static func signals(incoming_array : Array, parent : Node):
 	for i in incoming_array:
 		parent.add_user_signal(i)
+
+static func values(incoming_node : Node, variable, value):
+	print(incoming_node.name)
+	if incoming_node.get(variable) != null:
+		incoming_node.set(variable, value)
+		print('set %s to %s for %s' % [variable, value, incoming_node.name])
+	else:
+		print('failed to set %s on %s' % [variable, incoming_node.name])
+		incoming_node.set_meta(variable, value)
+
+static func folder_to_values(incoming_folder : String, incoming_node : Node):
+	var folders = files.scan_for_folders(incoming_folder)
+	for f in folders:
+		match classification.folder_category(f):
+			classification.category:
+				var variable_name = classification.strip(f)
+				var variable_path = files.path([incoming_folder, f]) + '/'
+				var variable_value = category(variable_path, incoming_node)
+				print('variable value is %s' % variable_value)
+				values(incoming_node, variable_name, variable_value)
+			classification.system:
+				values(incoming_node, classification.strip(f), system(files.path([incoming_folder, f]), incoming_node))
