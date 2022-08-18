@@ -24,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://static/node_management/mounting_system.gd"
 }, {
-"base": "Core",
+"base": "Node",
 "class": "System",
 "language": "GDScript",
 "path": "res://class/system_class.gd"
@@ -35,6 +35,11 @@ _global_script_classes=[ {
 "path": "res://static/node_management/alter.gd"
 }, {
 "base": "Reference",
+"class": "classification",
+"language": "GDScript",
+"path": "res://static/classification.gd"
+}, {
+"base": "Reference",
 "class": "fetch",
 "language": "GDScript",
 "path": "res://static/node_management/Fetch.gd"
@@ -42,7 +47,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "files",
 "language": "GDScript",
-"path": "res://static/data_management/Data_management.gd"
+"path": "res://static/File management/Data_management.gd"
 }, {
 "base": "Reference",
 "class": "scripts",
@@ -60,6 +65,7 @@ _global_script_class_icons={
 "Mount": "",
 "System": "",
 "alter": "",
+"classification": "",
 "fetch": "",
 "files": "",
 "scripts": "",
@@ -69,7 +75,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Parade"
-run/main_scene="res://system/core.tscn"
+run/main_scene="res://_system_/core.tscn"
 config/icon="res://graphics/icon.png"
 
 [editor]

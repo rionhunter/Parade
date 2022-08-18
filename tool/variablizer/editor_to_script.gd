@@ -7,8 +7,8 @@ func _ready():
 		return
 		
 	core = get_parent()
-	if not core.system.empty():
-		parse_value(core, core.system)
+#	if not core.system.empty():
+#		parse_value(core, core.system)
 	pass
 	
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://system/core.gd" type="Script" id=1]
+[ext_resource path="res://_system_/core.gd" type="Script" id=1]
 [ext_resource path="res://tool/variablizer/editor_to_script.gd" type="Script" id=2]
 
 [node name="core" type="Node"]

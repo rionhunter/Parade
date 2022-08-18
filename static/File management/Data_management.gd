@@ -94,9 +94,9 @@ static func scan(address, type = with.FILE, file_type = ['tscn', '.gd']):
 		with.FILETYPE:
 			return scan_folder_for_file_types(address, file_type)
 		with.FOLDER:
-			return scan_folders_for_folders(address)
+			return scan_for_folders(address)
 
-static func scan_folders_for_folders(address):
+static func scan_for_folders(address):
 	var d = Directory.new()
 	d.open(address)
 	var output = []

@@ -1,9 +1,13 @@
-extends Core
+extends Node
 class_name System
+
+var core
 
 var access = {} # the loaded subsystems
 
-func initialise():
+func _ready():
+	core = get_tree().get_nodes_in_group('core')[0]
+	print('mounted %s' % name)
 	_prelaunch()
 	launch_sequence()
 
