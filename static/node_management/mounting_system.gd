@@ -36,8 +36,8 @@ static func system(incoming_system_file_path, incoming_parent):
 	var script_to_load = files.scan(incoming_system_file_path, files.FILETYPE, ['.gd'])
 	if not script_to_load:
 		var output = System.new()
-		output.name = files.file_name(incoming_system_file_path)
 		incoming_parent.add_child(output)
+		output.name = files.file_name(incoming_system_file_path)
 		
 		return output
 	folder(incoming_system_file_path, incoming_parent)
@@ -66,6 +66,12 @@ static func node(incoming_parent, incoming_name = ''):
 	if incoming_name:
 		output.name = incoming_name
 	return output
+
+static func this(node, parent, incoming_name = ''):
+	parent.add_child(node)
+	if incoming_name:
+		node.name = incoming_name
+	return node
 
 static func script_to_node(incoming_node, incoming_script):
 	var a = load(incoming_script)

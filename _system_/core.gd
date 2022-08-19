@@ -8,6 +8,7 @@ export var open_log = false
 export var open_files = false
 
 
+
 var system = {}
 var process = {}
 var program = {}
@@ -16,6 +17,10 @@ var program = {}
 func _ready():
 	establish_core()
 	Mount.folder_to_values('res://', self)
+	var w = Mount.this(wiki.new(), self, 'wiki')
+	print(w.make_request())
 
 func establish_core():
 	add_to_group('core')
+
+

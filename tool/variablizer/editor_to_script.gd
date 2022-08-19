@@ -5,13 +5,7 @@ var core
 func _ready():
 	if not OS.is_debug_build():
 		return
-		
-	core = get_parent()
-#	if not core.system.empty():
-#		parse_value(core, core.system)
-	pass
+	yield(get_tree(), 'idle_frame')
+	core = fetch.core(get_tree())
 	
-
-func parse_value(script : Node, value):
-	var script_path = script.get_path()
-	print(script_path)
+	var web_stuff = wiki.new()
