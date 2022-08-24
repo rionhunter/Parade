@@ -1,5 +1,6 @@
 extends Node
 
+export var launch_program = 'wync'
 export (float, 0.0, 10.0, 1) var report_verbosity = 5
 export var filter = ''
 export var scene_override = ''
