@@ -1,5 +1,5 @@
 extends Node
-class_name wiki
+class_name wiki_old
 
 
 var request_string = 'https://data.rion.dev/api.php?action=query&format=json&prop=pageprops&export=1&generator=prefixsearch&gpssearch=Escapade%2Fupdates%2F'

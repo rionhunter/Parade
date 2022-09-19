@@ -4,7 +4,6 @@ enum {default, category, system}
 
 static func folder_category(incoming_path):
 	var folder_name : String = files.file_name(incoming_path)
-	print('inspecting %s' % folder_name)
 	if folder_name.begins_with('_'):
 		if folder_name.ends_with('_'):
 			return category

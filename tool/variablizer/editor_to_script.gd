@@ -8,4 +8,4 @@ func _ready():
 	yield(get_tree(), 'idle_frame')
 	core = fetch.core(get_tree())
 	
-	var web_stuff = wiki.new()
+	var web_stuff = wiki_old.new()

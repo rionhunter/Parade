@@ -41,6 +41,7 @@ static func path(incoming_var, type = NONE):
 		TYPE_BOOL:
 			return incoming_var
 
+
 static func _path_from_string(incoming, type = NONE):
 	match type:
 		NONE:
@@ -344,6 +345,18 @@ static func root_path_check(incoming_path : String):
 	if folder_exists(incoming_path) and not incoming_path.ends_with('/'):
 		incoming_path += '/'
 	return incoming_path
+
+static func root_swap(incoming_path : String):
+	if incoming_path.begins_with(user):
+		return _swap_to_resource(incoming_path)
+	else:
+		return _swap_to_user(incoming_path)
+
+static func _swap_to_resource(incoming_path):
+	return resource + incoming_path.right(user.length())
+
+static func _swap_to_user(incoming_path):
+	return user + incoming_path.right(resource.length())
 
 # ~~~~~~~~~~~~~~~~~~~~~~ TXT AND FURTHER FILE MANAGEMENT ~~~~~~~~~~~~~~~~~~~~~~
 

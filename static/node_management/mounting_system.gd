@@ -25,7 +25,6 @@ static func category(incoming_path, node_to_parent):
 	
 # Systems are effectively just folders with scripts in them that are of the same name as the folder
 static func systems(incoming_folder_of_systems, node_to_parent):
-	print('Mounting systems for %s' % incoming_folder_of_systems)
 	var incoming_array = files.scan_for_folders(incoming_folder_of_systems)
 	var output = {}
 	for sub_system in incoming_array:
@@ -91,7 +90,6 @@ static func signals(incoming_array : Array, parent : Node):
 		parent.add_user_signal(i)
 
 static func values(incoming_node : Node, variable, value):
-	print(incoming_node.name)
 	if incoming_node.get(variable) != null:
 		incoming_node.set(variable, value)
 		print('set %s to %s for %s' % [variable, value, incoming_node.name])

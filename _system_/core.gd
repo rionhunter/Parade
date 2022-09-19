@@ -18,8 +18,7 @@ var program = {}
 func _ready():
 	establish_core()
 	Mount.folder_to_values('res://', self)
-	var w = Mount.this(wiki.new(), self, 'wiki')
-	print(w.make_request())
+	print(Convert.string(system.generation.get_method_list(), true, false, true))
 
 func establish_core():
 	add_to_group('core')

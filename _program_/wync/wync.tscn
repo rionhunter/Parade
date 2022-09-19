@@ -1,4 +1,11 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.520408, 0.663265, 1 )
+colors = PoolColorArray( 0.782578, 0.782578, 0.782578, 1, 0.716953, 0.716953, 0.716953, 1, 0.825547, 0.825547, 0.825547, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 
 [node name="wync" type="Control"]
 anchor_right = 1.0
@@ -6,3 +13,44 @@ anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Settings" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Settings"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 214.0
+margin_top = 57.0
+margin_right = -214.0
+margin_bottom = -57.0
+texture = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
+anchor_left = 0.209
+anchor_top = 0.095
+anchor_right = 0.791
+anchor_bottom = 0.905
+margin_left = -0.0160065
+margin_top = -3.8147e-06
+margin_right = 0.0159912
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="Settings/VBoxContainer"]
+margin_right = 596.0
+
+[node name="CenterContainer2" type="CenterContainer" parent="Settings/VBoxContainer"]
+margin_top = 4.0
+margin_right = 596.0
+margin_bottom = 4.0

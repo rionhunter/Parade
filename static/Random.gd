@@ -1,4 +1,9 @@
-extends System
+class_name Random
 
-func _launched():
-	pass
+static func coin():
+	randomize()
+	var output = randf()
+	if output > 0.5:
+		return true
+	else: return false
+	
