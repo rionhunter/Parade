@@ -3,6 +3,13 @@ class_name fetch
 static func core(node_tree):
 	return node_tree.get_nodes_in_group('core')[0]
 
+static func the(node_title, node_tree):
+	var output = node_tree.get_nodes_in_group(node_title)
+	if output.empty():
+		return
+	else:
+		return output
+
 static func get_parent_by_editor_description(incoming_node : Node, description):
 	match incoming_node.editor_description:
 		description:

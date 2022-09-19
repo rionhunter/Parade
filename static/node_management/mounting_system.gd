@@ -34,13 +34,13 @@ static func systems(incoming_folder_of_systems, node_to_parent):
 static func system(incoming_system_file_path, incoming_parent):
 	var script_to_load = files.scan(incoming_system_file_path, files.FILETYPE, ['.gd'])
 	if not script_to_load:
-		var output = System.new()
+		var output = System.new(incoming_system_file_path)
 		incoming_parent.add_child(output)
 		output.name = files.file_name(incoming_system_file_path)
 		
 		return output
 	folder(incoming_system_file_path, incoming_parent)
-#	print('Mounted ', files.file_name(incoming_system_file_path))
+	print('Mounted %s to %s' % [files.file_name(incoming_system_file_path), incoming_parent.name])
 	return script_to_node(node(incoming_parent), script_to_load[0])
 
 static func scan_script_path(incoming_node):
